@@ -1,0 +1,11 @@
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreTest\bin\Debug\netcoreapp2.0\CoreTest.deps.json
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreTest\bin\Debug\netcoreapp2.0\CoreTest.runtimeconfig.json
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreTest\bin\Debug\netcoreapp2.0\CoreTest.runtimeconfig.dev.json
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreTest\bin\Debug\netcoreapp2.0\CoreTest.dll
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreTest\bin\Debug\netcoreapp2.0\CoreTest.pdb
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreTest\obj\Debug\netcoreapp2.0\CoreTest.csprojResolveAssemblyReference.cache
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreTest\obj\Debug\netcoreapp2.0\CoreTest.csproj.CoreCompileInputs.cache
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreTest\obj\Debug\netcoreapp2.0\CoreTest.AssemblyInfoInputs.cache
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreTest\obj\Debug\netcoreapp2.0\CoreTest.AssemblyInfo.cs
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreTest\obj\Debug\netcoreapp2.0\CoreTest.dll
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreTest\obj\Debug\netcoreapp2.0\CoreTest.pdb
