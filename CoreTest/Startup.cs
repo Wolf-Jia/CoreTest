@@ -45,6 +45,8 @@ namespace CoreTest
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
             });
+
+            app.Map("/ws", SocketHandler.Map);
         }
     }
 }
