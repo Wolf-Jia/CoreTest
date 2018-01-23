@@ -11,15 +11,40 @@
     <meta name="viewport" content="width=device-width" />
     <title>ChatRoom</title>
     <style>
+        .divContent {
+            width: 500px;
+            height: 900px;
+            padding: 15px;
+            background-color: #F7F7F9;
+            background-image: url('/images/background.png');
+            background-size: cover;
+        }
+
+        .divContent {
+            margin: 10px auto;
+            margin-top: 10px;
+            width: 500px;
+            height: 500px;
+            padding: 15px;
+            background-color: #F7F7F9;
+            background-image: url('/images/background.png');
+            background-size: cover;
+        }
+
         .divOutput {
             overflow-y: auto;
             margin: 0px auto;
-            margin-top: 120px;
+            margin-top: 20px;
             margin-bottom: 10px;
-            width: 100px;
-            height: 400px;
+            width: 100%;
+            height: 100%;
             padding: 15px;
             padding-top: 0px;
+        }
+        .msgBlockInfo {
+            padding-left:10px;
+            padding-top: 8px;
+            color: #ff0000;
         }
     </style>
 </head>
@@ -27,120 +52,118 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-
-    <div class="divOutput"></div>
-    <div class="login" style="">
-        <input type="text" class="username" placeholder="Name:" style="margin-right:5px"/>
-        MM<input type="radio" name="sex" checked value="girl" />GG<input type="radio" name="sex" value="boy" />
-        <button class="btnLogin" onclick="doConnect()">Login</button>
+    <div class="divContent">
+        <div class="divOutput"></div>
+        <div class="login" style="">
+            <input type="text" class="username" placeholder="Name:" style="margin-right:5px" />
+            MM<input type="radio" name="sex" checked value="girl" />GG<input type="radio" name="sex" value="boy" />
+            <button class="btnLogin" onclick="doConnect()">Login</button>
+        </div>
     </div>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script type="text/javascript">
+            var HtmlUtil = {
+                /*1.用浏览器内部转换器实现html转码*/
+                htmlEncode: function (html) {
+                    //1.首先动态创建一个容器标签元素，如DIV
+                    var temp = document.createElement("div");
+                    //2.然后将要转换的字符串设置为这个元素的innerText(ie支持)或者textContent(火狐，google支持)
+                    (temp.textContent != undefined) ? (temp.textContent = html) : (temp.innerText = html);
+                    //3.最后返回这个元素的innerHTML，即得到经过HTML编码转换的字符串了
+                    var output = temp.innerHTML;
+                    temp = null;
+                    return output;
 
-    <script src="~/lib/jquery/dist/jquery.js"></script>
+                },
+                /*2.用浏览器内部转换器实现html解码*/
+                htmlDecode: function (text) {
+                    //1.首先动态创建一个容器标签元素，如DIV
+                    var temp = document.createElement("div");
+                    //2.然后将要转换的字符串设置为这个元素的innerHTML(ie，火狐，google都支持)
+                    temp.innerHTML = text;
+                    //3.最后返回这个元素的innerText(ie支持)或者textContent(火狐，google支持)，即得到经过HTML解码的字符串了。
+                    var output = temp.innerText || temp.textContent;
+                    temp = null;
+                    return output;
 
-    <script type="text/javascript">
-        var HtmlUtil = {
-            /*1.用浏览器内部转换器实现html转码*/
-            htmlEncode: function (html) {
-                //1.首先动态创建一个容器标签元素，如DIV
-                var temp = document.createElement("div");
-                //2.然后将要转换的字符串设置为这个元素的innerText(ie支持)或者textContent(火狐，google支持)
-                (temp.textContent != undefined) ? (temp.textContent = html) : (temp.innerText = html);
-                //3.最后返回这个元素的innerHTML，即得到经过HTML编码转换的字符串了
-                var output = temp.innerHTML;
-                temp = null;
-                return output;
-
-            },
-            /*2.用浏览器内部转换器实现html解码*/
-            htmlDecode: function (text) {
-                //1.首先动态创建一个容器标签元素，如DIV
-                var temp = document.createElement("div");
-                //2.然后将要转换的字符串设置为这个元素的innerHTML(ie，火狐，google都支持)
-                temp.innerHTML = text;
-                //3.最后返回这个元素的innerText(ie支持)或者textContent(火狐，google支持)，即得到经过HTML解码的字符串了。
-                var output = temp.innerText || temp.textContent;
-                temp = null;
-                return output;
-
-            }
-        };
+                }
+            };
 
 
-        var socket = null;
-        //服务器
-        var ws = location.protocol === "https" ? "wss" : "ws";// https 对应修改 wss
-        var uri = ws + "://" + window.location.host + "/ws";
+            var socket = null;
+            //服务器
+            var ws = location.protocol === "https" ? "wss" : "ws";// https 对应修改 wss
+            var uri = ws + "://" + window.location.host + "/ws";
 
-        //输入
-        function write(data, eleClass) {
-            var $output = $(".divOutput");
+            //输入
+            function write(data, eleClass) {
+                var $output = $(".divOutput");
 
-            //系统消息
-            if (data.info) {
-                $output.append("<div class='msgBlockInfo'>【系统】" + data.info + "</div>");
+                //系统消息
+                if (data.info) {
+                    $output.append("<div class='msgBlockInfo'>【系统】" + data.info + "</div>");
+                    $output.scrollTop($output[0].scrollHeight);
+                    return;
+                }
+
+                if (data.time) {
+                    $output.append("<div class='msgBlockTime'>" + moment(data.time).format("YYYY-MM-DD HH:mm:ss"), + "</div>");
+                }
+                var sex = data.sex === "男" ? "♂" : "♀";
+                $output.append("<div class='msgBlockContent'><span class=" + eleClass + ">" + HtmlUtil.htmlEncode(data.name) + "(" + sex + ")：</span><span class='msgContent'>" + HtmlUtil.htmlEncode(data.content) + "</span></div>");
                 $output.scrollTop($output[0].scrollHeight);
-                return;
             }
 
-            if (data.time) {
-                $output.append("<div class='msgBlockTime'>" + moment(data.time).format("YYYY-MM-DD HH:mm:ss"), + "</div>");
-            }
-            var sex = data.sex === "男" ? "♂" : "♀";
-            $output.append("<div class='msgBlockContent'><span class=" + eleClass + ">" + HtmlUtil.htmlEncode(data.name) + "(" + sex + ")：</span><span class='msgContent'>" + HtmlUtil.htmlEncode(data.content) + "</span></div>");
-            $output.scrollTop($output[0].scrollHeight);
-        }
-
-        function timedCount()
-        {
-            if (socket.readyState == 1){
-                socket.send("heartbeat");
-                time = setTimeout(timedCount, 58 * 1000);
-            }
-        }
-
-        function doConnect(){ 
-            var username = HtmlUtil.htmlEncode($(".username").val());
-
-            if (!username){
-                write({ "info": "input your name:" });
-                return;
-            }
-
-            if(socket === null || socket.readyState != 1){
-                socket = new WebSocket(uri + "?username=" + username);
-                timedCount();
-            }
-
-            socket.onopen = function (e) {
-                $(".logout").removeClass("displayNone");
-                $(".login").addClass("displayNone");
-            };
-
-            socket.onclose = function (e) {
-                if (e.code === 1008) {
-                    write({ "info": username + "，您已被迫下线。" + e.reason });
+            function timedCount() {
+                if (socket.readyState == 1) {
+                    socket.send("heartbeat");
+                    time = setTimeout(timedCount, 58 * 1000);
                 }
-                else {
-                    write({ "info": username + "，您已下线。" });
+            }
+
+            function doConnect() {
+                var username = HtmlUtil.htmlEncode($(".username").val());
+
+                if (!username) {
+                    write({ "info": "input your name:" });
+                    return;
                 }
 
-                $(".logout").addClass("displayNone");
-                $(".login").removeClass("displayNone");
-                $(".btnLogin").prop("disabled", false).css("background-color", "#fff").text("Login");
-                socket = null;
-                clearTimeout(time);
-            };
+                if (socket === null || socket.readyState != 1) {
+                    socket = new WebSocket(uri + "?username=" + username);
+                    timedCount();
+                }
 
-            socket.onmessage = function (e) {
-                var chat = JSON.parse(e.data);
-                write(chat);
-            };
+                socket.onopen = function (e) {
+                    $(".logout").removeClass("displayNone");
+                    $(".login").addClass("displayNone");
+                };
 
-            socket.onerror = function (e) {
-                if (e.data)
-                    write({ "info": "异常" + e.data });
-            };
-        }
-    </script>
+                socket.onclose = function (e) {
+                    if (e.code === 1008) {
+                        write({ "info": username + "，您已被迫下线。" + e.reason });
+                    }
+                    else {
+                        write({ "info": username + "，您已下线。" });
+                    }
+
+                    $(".logout").addClass("displayNone");
+                    $(".login").removeClass("displayNone");
+                    $(".btnLogin").prop("disabled", false).css("background-color", "#fff").text("Login");
+                    socket = null;
+                    clearTimeout(time);
+                };
+
+                socket.onmessage = function (e) {
+                    var chat = JSON.parse(e.data);
+                    write(chat);
+                };
+
+                socket.onerror = function (e) {
+                    if (e.data)
+                        write({ "info": "异常" + e.data });
+                };
+            }
+        </script>
 </body>
 </html>
