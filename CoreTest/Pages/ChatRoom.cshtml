@@ -46,12 +46,109 @@
             padding-top: 8px;
             color: #ff0000;
         }
+
+        #canvas {
+            width: 500px;
+            height: 600px;
+            margin: 10px auto;
+            padding: 10px;
+            background-color: gray;
+        }
+        #content {
+            width: 500px;
+            height: 500px;
+            background-color: blue;
+        }
+        #login {
+            width: 500px;
+            height: 30px;
+            margin-top:5px;
+            background-color: blue;
+        }
+        #content p {
+            margin: 3px auto;
+            background-color: yellow;
+            word-wrap: break-word;
+            word-break: break-all;
+            overflow: hidden;
+        }
     </style>
+
+    
 </head>
 <body>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+    <div id="canvas">
+        <div id="content">
+            <p>test1</p>
+            <p>test2</p>
+            <p>test3test3test3test3test3test3test3test3test3test3test3test3test3test3test3test3test3test3test3test3test3</p>
+            <p>test4</p>
+        </div>
+        <div id="login">
+            <input id="txtName" type="text" /><input id="btnLogin" type="button" value="login"/>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var HtmlUtil = {
+            /*1.用浏览器内部转换器实现html转码*/
+            htmlEncode: function (html) {
+                //1.首先动态创建一个容器标签元素，如DIV
+                var temp = document.createElement("div");
+                //2.然后将要转换的字符串设置为这个元素的innerText(ie支持)或者textContent(火狐，google支持)
+                (temp.textContent != undefined) ? (temp.textContent = html) : (temp.innerText = html);
+                //3.最后返回这个元素的innerHTML，即得到经过HTML编码转换的字符串了
+                var output = temp.innerHTML;
+                temp = null;
+                return output;
+
+            },
+            /*2.用浏览器内部转换器实现html解码*/
+            htmlDecode: function (text) {
+                //1.首先动态创建一个容器标签元素，如DIV
+                var temp = document.createElement("div");
+                //2.然后将要转换的字符串设置为这个元素的innerHTML(ie，火狐，google都支持)
+                temp.innerHTML = text;
+                //3.最后返回这个元素的innerText(ie支持)或者textContent(火狐，google支持)，即得到经过HTML解码的字符串了。
+                var output = temp.innerText || temp.textContent;
+                temp = null;
+                return output;
+
+            }
+        };
+
+        var socket = null;
+        //服务器
+        var ws = location.protocol === "https" ? "wss" : "ws";// https 对应修改 wss
+        var uri = ws + "://" + window.location.host + "/ws";
+
+        function Output(){ 
+            
+        }
+
+        function Login(){ 
+            var username = HtmlUtil.htmlEncode($("#txtName").val());
+            if (!username) {
+                alert("please input validate name.");            
+            }
+
+            if (socket == null || socket.readyState!=1) {
+                socket = new WebSocket(uri + "?username=" + username);
+            }
+
+            socket.onopen = function (e) {
+                
+
+            }
+
+        }
+        
+    </script>
+
     <div class="divContent">
         <div class="divOutput"></div>
         <div class="login" style="">
@@ -62,38 +159,6 @@
     </div>
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script type="text/javascript">
-            var HtmlUtil = {
-                /*1.用浏览器内部转换器实现html转码*/
-                htmlEncode: function (html) {
-                    //1.首先动态创建一个容器标签元素，如DIV
-                    var temp = document.createElement("div");
-                    //2.然后将要转换的字符串设置为这个元素的innerText(ie支持)或者textContent(火狐，google支持)
-                    (temp.textContent != undefined) ? (temp.textContent = html) : (temp.innerText = html);
-                    //3.最后返回这个元素的innerHTML，即得到经过HTML编码转换的字符串了
-                    var output = temp.innerHTML;
-                    temp = null;
-                    return output;
-
-                },
-                /*2.用浏览器内部转换器实现html解码*/
-                htmlDecode: function (text) {
-                    //1.首先动态创建一个容器标签元素，如DIV
-                    var temp = document.createElement("div");
-                    //2.然后将要转换的字符串设置为这个元素的innerHTML(ie，火狐，google都支持)
-                    temp.innerHTML = text;
-                    //3.最后返回这个元素的innerText(ie支持)或者textContent(火狐，google支持)，即得到经过HTML解码的字符串了。
-                    var output = temp.innerText || temp.textContent;
-                    temp = null;
-                    return output;
-
-                }
-            };
-
-
-            var socket = null;
-            //服务器
-            var ws = location.protocol === "https" ? "wss" : "ws";// https 对应修改 wss
-            var uri = ws + "://" + window.location.host + "/ws";
 
             //输入
             function write(data, eleClass) {
