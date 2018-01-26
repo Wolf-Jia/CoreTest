@@ -89,7 +89,7 @@
             <p>test4</p>
         </div>
         <div id="login">
-            <input id="txtName" type="text" /><input id="btnLogin" type="button" value="login"/>
+            <input id="txtName" type="text" /><input id="btnLogin" type="button" value="login" onclick="Login()"/>
         </div>
     </div>
 
@@ -133,7 +133,8 @@
         function Login(){ 
             var username = HtmlUtil.htmlEncode($("#txtName").val());
             if (!username) {
-                alert("please input validate name.");            
+                alert("please input validate name.");
+                return;          
             }
 
             if (socket == null || socket.readyState!=1) {
@@ -141,10 +142,20 @@
             }
 
             socket.onopen = function (e) {
-                
-
+                alert("socket open");
             }
 
+            socket.onclose = function (e) {
+                alert("socket close");
+            }
+
+            socket.onmessage = function (e) {
+                alert("socket onmessage");
+            }
+
+            socket.onerror = function (e) {
+                alert("socket onerror");
+            }
         }
         
     </script>
