@@ -91,6 +91,9 @@
         <div id="login">
             <input id="txtName" type="text" /><input id="btnLogin" type="button" value="login" onclick="Login()"/>
         </div>
+        <div id="message" style="display:none;">
+            <span id="labName"></span>:<input id="txtMessage" type="text" /><input id="btnSend" type="button" value="send" onclick="Send()" /><input id="btnLogout" type="button" value="logout" onclick="Logout()" />
+        </div>
     </div>
 
     <script type="text/javascript">
@@ -126,8 +129,13 @@
         var ws = location.protocol === "https" ? "wss" : "ws";// https 对应修改 wss
         var uri = ws + "://" + window.location.host + "/ws";
 
-        function Output(){ 
-            
+        function Output(data){ 
+            if (data.info) {
+                $("#content").children().last().append("<p>" + data.info + "</p>");
+            }
+            if (data.content) {
+                $("#content").children().last().append("<p>" + data.content + "</p>");
+            }
         }
 
         function Login(){ 
@@ -141,8 +149,13 @@
                 socket = new WebSocket(uri + "?username=" + username);
             }
 
+            $("#labName").html(username);
+
+
             socket.onopen = function (e) {
-                alert("socket open");
+                //alert("socket open");
+                $("#login").hide();
+                $("#message").show();
             }
 
             socket.onclose = function (e) {
@@ -150,14 +163,43 @@
             }
 
             socket.onmessage = function (e) {
-                alert("socket onmessage");
+                var message = JSON.parse(e.data);
+                Output(message);
+                //alert(message.info);
             }
 
             socket.onerror = function (e) {
                 alert("socket onerror");
             }
         }
-        
+
+        function Logout() {
+            $("#login").show();
+            $("#message").hide(); 
+            socket.close();
+        }
+
+        function Send() {
+            if (!$("#txtMessage").val()) { 
+                return;
+            }
+
+            if (socket == null){
+                alert("login first!");
+                return;
+            }
+
+            var message = {
+                "content": $("#txtMessage").val() || "抖一下~~",
+                    "time": new Date(),
+                    "name": $(".userName").val() || "匿名",
+                    "sex": $(":radio:checked").val(),
+                };
+            socket.send(JSON.stringify(message));
+                //write(message, "me");
+
+            $("#sendInput").val("");
+        }
     </script>
 
     <div class="divContent">
