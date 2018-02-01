@@ -1,0 +1,222 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ChatRoom</title>
+    <style>
+        .divContent {
+            width: 500px;
+            height: 900px;
+            padding: 15px;
+            background-color: #F7F7F9;
+            background-image: url('/images/background.png');
+            background-size: cover;
+        }
+
+        .divContent {
+            margin: 10px auto;
+            margin-top: 10px;
+            width: 500px;
+            height: 500px;
+            padding: 15px;
+            background-color: #F7F7F9;
+            background-image: url('/images/background.png');
+            background-size: cover;
+        }
+
+        .divOutput {
+            overflow-y: auto;
+            margin: 0px auto;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            width: 100%;
+            height: 100%;
+            padding: 15px;
+            padding-top: 0px;
+        }
+
+        .msgBlockInfo {
+            padding-left: 10px;
+            padding-top: 8px;
+            color: #ff0000;
+        }
+
+        #canvas {
+            width: 500px;
+            height: 600px;
+            margin: 10px auto;
+            padding: 10px;
+            background-color: gray;
+        }
+
+        #content {
+            width: 500px;
+            height: 500px;
+        }
+
+        #login {
+            width: 500px;
+            height: 30px;
+            margin-top: 5px;
+            background-color: blue;
+        }
+
+        #content p {
+            margin: 3px auto;
+            background-color: yellow;
+            word-wrap: break-word;
+            word-break: break-all;
+            overflow: hidden;
+        }
+        #labName{
+            color: yellow;            
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas">
+        <div id="content">
+            <p></p>
+        </div>
+        <div id="login">
+            <input id="txtName" type="text" /><input id="btnLogin" type="button" value="login" onclick="Login()" />
+        </div>
+        <div id="message" style="display:none;">
+            <span id="labName"></span><input id="txtMessage" type="text" /><input id="btnSend" type="button" value="send" onclick="Send()" /><input id="btnLogout" type="button" value="logout" onclick="Logout()" />
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript">
+
+         $(function () {
+            var historyMessage = @Html.Raw(@ViewBag.HistoryMessage);
+            for (var i = 0; i < historyMessage.length; i++) {
+                Output(historyMessage[i]);
+            }
+        });
+
+            var HtmlUtil = {
+                /*1.用浏览器内部转换器实现html转码*/
+                htmlEncode: function (html) {
+                    //1.首先动态创建一个容器标签元素，如DIV
+                    var temp = document.createElement("div");
+                    //2.然后将要转换的字符串设置为这个元素的innerText(ie支持)或者textContent(火狐，google支持)
+                    (temp.textContent != undefined) ? (temp.textContent = html) : (temp.innerText = html);
+                    //3.最后返回这个元素的innerHTML，即得到经过HTML编码转换的字符串了
+                    var output = temp.innerHTML;
+                    temp = null;
+                    return output;
+
+                },
+                /*2.用浏览器内部转换器实现html解码*/
+                htmlDecode: function (text) {
+                    //1.首先动态创建一个容器标签元素，如DIV
+                    var temp = document.createElement("div");
+                    //2.然后将要转换的字符串设置为这个元素的innerHTML(ie，火狐，google都支持)
+                    temp.innerHTML = text;
+                    //3.最后返回这个元素的innerText(ie支持)或者textContent(火狐，google支持)，即得到经过HTML解码的字符串了。
+                    var output = temp.innerText || temp.textContent;
+                    temp = null;
+                    return output;
+
+                }
+            };
+
+            var socket = null;
+            //服务器
+            var ws = location.protocol === "https" ? "wss" : "ws";// https 对应修改 wss
+            var uri = ws + "://" + window.location.host + "/ws";
+
+            function Output(data) {
+                var message = data.Content;
+                if (message) {
+                    $("#content").children().last().append("<p>" + message + "</p>");
+                }
+            }
+
+            function Login() {
+                var username = HtmlUtil.htmlEncode($("#txtName").val());
+                if (!username) {
+                    alert("please input validate name.");
+                    return;
+                }
+
+                if (socket == null || socket.readyState != 1) {
+                    socket = new WebSocket(uri + "?username=" + username);
+                }
+
+                $("#labName").html(username + ": ");
+
+
+                socket.onopen = function (e) {
+                    //alert("socket open");
+                    $("#login").hide();
+                    $("#message").show();
+                }
+
+                socket.onclose = function (e) {
+                    var message = $("#labName").html() + "已离开";
+                    Output(message);
+                    //alert("socket close");
+                }
+
+                socket.onmessage = function (e) {
+                    var message = JSON.parse(e.data);
+                    Output(message);
+                    //alert(message.info);
+                }
+
+                socket.onerror = function (e) {
+                    Logout();
+                }
+            }
+
+            function Logout() {
+                $("#login").show();
+                $("#message").hide();
+                socket.close();
+            }
+
+            function Send() {
+                if (!$("#txtMessage").val()) {
+                    alert("type message first.")
+                    return;
+                }
+
+                if (socket == null) {
+                    alert("login first.");
+                    return;
+                }
+
+                var message = {
+                    "Content": $("#txtMessage").val() || "抖一下~~",
+                    "Time": new Date(),
+                    "Username": $("#labName").html() || "匿名",
+                    "Type": "message",
+                };
+                socket.send(JSON.stringify(message));
+                //write(message, "me");
+
+                $("#txtMessage").val("");
+            }
+
+            //回车发送消息
+            $("#txtMessage").keydown(function (e) {
+                if (e.keyCode === 13) {
+                    Send();
+                }
+            });
+
+            //回车登录
+            $("#txtName").keydown(function (e) {
+                if (e.keyCode === 13) {
+                    Login();
+                }
+            });
+        </script>
+</body>
+</html>
