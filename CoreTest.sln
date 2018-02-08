@@ -1,11 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreTest", "CoreTest\CoreTest.csproj", "{92F25EAD-D4B6-47C6-B238-14A7BF32D128}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreMvcTest", "CoreMvcTest\CoreMvcTest.csproj", "{E16FBBC4-17E3-4C2B-8B0F-70993A897CD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreMvcTest", "CoreMvcTest\CoreMvcTest.csproj", "{E16FBBC4-17E3-4C2B-8B0F-70993A897CD3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{385AD83B-AF2D-47F9-AFF1-E9C1F4F483A4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreApiTest", "CoreApiTest\CoreApiTest.csproj", "{F434E9F6-5B62-4E8D-B5D6-C9A5E99B778F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salmon.Common", "..\QuartzScheduler-core\Salmon.Common\Salmon.Common\Salmon.Common.csproj", "{9EC6D1AB-7B40-4218-AE34-43D40FA70C75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMvc", "WebMvc\WebMvc.csproj", "{979C53FB-4377-40F4-9033-DE71254A8EE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Test", "Business.Test\Business.Test.csproj", "{E2525146-1BE3-425F-9EB1-59A3AF66F0B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +21,30 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{92F25EAD-D4B6-47C6-B238-14A7BF32D128}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92F25EAD-D4B6-47C6-B238-14A7BF32D128}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92F25EAD-D4B6-47C6-B238-14A7BF32D128}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92F25EAD-D4B6-47C6-B238-14A7BF32D128}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E16FBBC4-17E3-4C2B-8B0F-70993A897CD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E16FBBC4-17E3-4C2B-8B0F-70993A897CD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E16FBBC4-17E3-4C2B-8B0F-70993A897CD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E16FBBC4-17E3-4C2B-8B0F-70993A897CD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{385AD83B-AF2D-47F9-AFF1-E9C1F4F483A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{385AD83B-AF2D-47F9-AFF1-E9C1F4F483A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{385AD83B-AF2D-47F9-AFF1-E9C1F4F483A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{385AD83B-AF2D-47F9-AFF1-E9C1F4F483A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F434E9F6-5B62-4E8D-B5D6-C9A5E99B778F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F434E9F6-5B62-4E8D-B5D6-C9A5E99B778F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F434E9F6-5B62-4E8D-B5D6-C9A5E99B778F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F434E9F6-5B62-4E8D-B5D6-C9A5E99B778F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EC6D1AB-7B40-4218-AE34-43D40FA70C75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EC6D1AB-7B40-4218-AE34-43D40FA70C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EC6D1AB-7B40-4218-AE34-43D40FA70C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EC6D1AB-7B40-4218-AE34-43D40FA70C75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{979C53FB-4377-40F4-9033-DE71254A8EE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{979C53FB-4377-40F4-9033-DE71254A8EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{979C53FB-4377-40F4-9033-DE71254A8EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{979C53FB-4377-40F4-9033-DE71254A8EE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2525146-1BE3-425F-9EB1-59A3AF66F0B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2525146-1BE3-425F-9EB1-59A3AF66F0B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2525146-1BE3-425F-9EB1-59A3AF66F0B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2525146-1BE3-425F-9EB1-59A3AF66F0B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

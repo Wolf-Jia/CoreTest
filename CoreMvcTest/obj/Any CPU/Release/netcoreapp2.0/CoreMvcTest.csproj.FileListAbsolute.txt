@@ -1,0 +1,11 @@
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreMvcTest\bin\Any CPU\Release\netcoreapp2.0\CoreMvcTest.deps.json
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreMvcTest\bin\Any CPU\Release\netcoreapp2.0\CoreMvcTest.runtimeconfig.json
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreMvcTest\bin\Any CPU\Release\netcoreapp2.0\CoreMvcTest.runtimeconfig.dev.json
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreMvcTest\bin\Any CPU\Release\netcoreapp2.0\CoreMvcTest.dll
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreMvcTest\bin\Any CPU\Release\netcoreapp2.0\CoreMvcTest.pdb
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreMvcTest\obj\Any CPU\Release\netcoreapp2.0\CoreMvcTest.csproj.CoreCompileInputs.cache
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreMvcTest\obj\Any CPU\Release\netcoreapp2.0\CoreMvcTest.AssemblyInfoInputs.cache
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreMvcTest\obj\Any CPU\Release\netcoreapp2.0\CoreMvcTest.AssemblyInfo.cs
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreMvcTest\obj\Any CPU\Release\netcoreapp2.0\CoreMvcTest.dll
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreMvcTest\obj\Any CPU\Release\netcoreapp2.0\CoreMvcTest.pdb
+C:\Users\MikeJia\Desktop\Project\Core\CoreTest\CoreMvcTest\obj\Any CPU\Release\netcoreapp2.0\CoreMvcTest.csprojResolveAssemblyReference.cache

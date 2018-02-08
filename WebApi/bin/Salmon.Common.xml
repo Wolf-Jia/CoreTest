@@ -1,0 +1,808 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Salmon.Common</name>
+    </assembly>
+    <members>
+        <member name="F:Salmon.Common.AutoMapper.Extensions.Sync">
+            <summary>
+            同步锁
+            </summary>
+        </member>
+        <member name="M:Salmon.Common.AutoMapper.Extensions.MapTo``2(``0,``1)">
+            <summary>
+            将源对象映射到目标对象
+            </summary>
+            <typeparam name="TSource">源类型</typeparam>
+            <typeparam name="TDestination">目标类型</typeparam>
+            <param name="source">源对象</param>
+            <param name="destination">目标对象</param>
+        </member>
+        <member name="M:Salmon.Common.AutoMapper.Extensions.MapTo``1(System.Object)">
+            <summary>
+            将源对象映射到目标对象
+            </summary>
+            <typeparam name="TDestination">目标类型</typeparam>
+            <param name="source">源对象</param>
+        </member>
+        <member name="M:Salmon.Common.AutoMapper.Extensions.MapTo``1(System.Object,``0)">
+            <summary>
+            将源对象映射到目标对象
+            </summary>
+        </member>
+        <member name="M:Salmon.Common.AutoMapper.Extensions.GetMap(System.Type,System.Type)">
+            <summary>
+            获取映射配置
+            </summary>
+        </member>
+        <member name="M:Salmon.Common.AutoMapper.Extensions.GetType(System.Object)">
+            <summary>
+            获取类型
+            </summary>
+        </member>
+        <member name="M:Salmon.Common.AutoMapper.Extensions.MapToList``1(System.Collections.IEnumerable)">
+            <summary>
+            将源集合映射到目标集合
+            </summary>
+            <typeparam name="TDestination">目标元素类型,范例：Sample,不要加List</typeparam>
+            <param name="source">源集合</param>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.BaseEntity`1.Id">
+            <summary>
+            主键Id
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.BaseEntity`1.Sorting">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.BaseEntity`1.CreatorId">
+            <summary>
+            创建人ID
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.BaseEntity`1.Creator">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.BaseEntity`1.CreatorIp">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.BaseEntity`1.CreateDate">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.BaseEntity`1.ModifierId">
+            <summary>
+            修改人ID
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.BaseEntity`1.Modifier">
+            <summary>
+            修改人用户名
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.BaseEntity`1.ModifierIp">
+            <summary>
+            修改日期
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.BaseEntity`1.ModifyDate">
+            <summary>
+            修改日期
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.BaseEntity`1.DeleteTag">
+            <summary>
+            删除标识 0、正常 1、已删除
+            </summary>
+        </member>
+        <!-- 对于成员“P:Salmon.Common.BaseModel.BaseUser.CellPhone”忽略有格式错误的 XML 注释 -->
+        <member name="P:Salmon.Common.BaseModel.BaseUser.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <!-- 对于成员“P:Salmon.Common.BaseModel.BaseUser.UserId”忽略有格式错误的 XML 注释 -->
+        <member name="P:Salmon.Common.BaseModel.IBaseAudited.Sorting">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.IBaseAudited.CreatorId">
+            <summary>
+            创建人ID
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.IBaseAudited.Creator">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.IBaseAudited.CreatorIp">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.IBaseAudited.CreateDate">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.IBaseAudited.ModifierId">
+            <summary>
+            修改人ID
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.IBaseAudited.Modifier">
+            <summary>
+            修改人用户名
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.IBaseAudited.ModifierIp">
+            <summary>
+            修改日期
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.IBaseAudited.ModifyDate">
+            <summary>
+            修改日期
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.IBaseAudited.DeleteTag">
+            <summary>
+            删除标识 0、正常 1、已删除
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.ResultDto`1.code">
+            <summary>
+            状态值
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.ResultDto`1.msg">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.BaseModel.ResultDto`1.data">
+            <summary>
+            返回数据
+            </summary>
+        </member>
+        <member name="T:Salmon.Common.ScDatabase.IdWorker">
+            tweeter的snowflake 移植到Java翻译成Net:
+              (a) id构成: 42位的时间前缀 + 10位的节点标识 + 12位的sequence避免并发的数字(12位不够用时强制得到新的时间前缀)
+                  注意这里进行了小改动: snowkflake是5位的datacenter加5位的机器id; 这里变成使用10位的机器id
+              (b) 对系统时间的依赖性非常强，需关闭ntp的时间同步功能。当检测到ntp时间调整后，将会拒绝分配id
+        </member>
+        <member name="M:Salmon.Common.ScDatabase.IdWorker.TilNextMillis(System.Int64)">
+            等待下一个毫秒的到来, 保证返回的毫秒数在参数lastTimestamp之后
+        </member>
+        <member name="M:Salmon.Common.ScDatabase.IdWorker.TimeGen">
+            获得系统当前毫秒数
+        </member>
+        <member name="M:Salmon.Common.DataMining.Bayes`1.BuildBoundaryRatio(System.Collections.Generic.List{`0})">
+            <summary>
+            Create boundary ratio in dictionary
+            </summary>
+            <param name="tSet"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.ScDataBase.ScEntityFramework.DataAccessBase`2.AddOrModify(`0[],Salmon.Common.ScDataBase.ScEntityFramework.DataAccessBase{`0,`1}.IdCreator,System.Boolean,System.String[])">
+            <summary>
+            modify entity except 'createtime, createby, modifytime' automatic
+            </summary>
+            <param name="entitySet"></param>
+            <param name="createEnetityId"></param>
+            <param name="modify">false: do not modify if exsit</param>
+            <param name="exceptPropertySet">modify except any spical column name</param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.ScDataBase.ScEntityFramework.DataAccessBase`2.Insert(`0)">
+            <summary>
+            插入实体
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.ScDataBase.ScEntityFramework.DataAccessBase`2.Update(`0)">
+            <summary>
+            更新实体
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.ScDataBase.ScEntityFramework.DataAccessBase`2.Delete(`0)">
+            <summary>
+            删除实体
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.ScDataBase.ScEntityFramework.DataAccessBase`2.GetEntity(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            根据条件查找单个实体
+            </summary>
+            <param name="exp">lambda查询条件where</param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.ScDataBase.ScEntityFramework.DataAccessBase`2.GetEntities">
+            <summary>
+            获取所有Entity
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.ScDataBase.ScEntityFramework.DataAccessBase`2.GetEntities(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            获取所有Entity
+            </summary>
+            <param name="exp">Lambda条件的where</param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.ScDataBase.ScEntityFramework.DataAccessBase`2.GetEntitiesCount">
+            <summary>
+            计算总个数(分页用到)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.ScDataBase.ScEntityFramework.DataAccessBase`2.GetEntitiesCount(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            计算总个数(分页用到)
+            </summary>
+            <param name="exp">Lambda条件的where</param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.ScDataBase.ScEntityFramework.DataAccessBase`2.GetEntitiesForPaging``1(System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},System.String,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32@)">
+            <summary>
+            分页查询(Linq分页方式)
+            </summary>
+            <param name="pageNumber">当前页</param>
+            <param name="pageSize">分页大小</param>
+            <param name="orderName">lambda排序名称</param>
+            <param name="sortOrder">排序,asc or desc</param>
+            <param name="exp">lambda查询条件where</param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.CronExpressionHelper.GetValue(System.String,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="attr"></param>
+            <param name="max">最大值用于*和?的情况，Second:59; Minute:59; Hour:23; Month:11; DayOfWeek:7; DayOfMonth:31</param>
+            <param name="min">最大值用于*和?的情况，Second:0; Minute:0; Hour:0; Month:0; DayOfWeek:1; DayOfMonth:1</param>
+            <returns></returns>
+        </member>
+        <member name="T:Salmon.Common.ScUtility.ExportHelper">
+            <summary>
+            文件导出支持类
+            
+            <para>*  支持文件类型：Excel和CSV</para>
+            </summary>
+            创建人：倪敏
+            创建日期：2012-09-19
+        </member>
+        <member name="F:Salmon.Common.ScUtility.ExportHelper.EncodeStr">
+            <summary>
+            编码格式
+            </summary>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.ExportExcel(System.Data.DataTable,System.String,System.String)">
+            <summary>
+            导出Excel表格
+            
+            <para>*  注意事项：DataTable的列头将转为Excel表格的列头,</para>
+            </summary>
+            <param name="dt">数据集</param>
+            <param name="fileName">文件名,可为空。为空时默认文件名：导出数据.xls</param>
+            <param name="title">标题,无标题设为空</param>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.ExportExcel(System.Data.DataTable,System.String,System.String[],System.String)">
+            <summary>
+            导出Excel表格
+            </summary>
+            <param name="dt">数据</param>
+            <param name="fileName">文件名,可为空。为空时默认文件名：导出数据.xls</param>
+            <param name="columnNames">列名，数量必须与列的数目一致，否则直接加载DataTable的列名。</param>
+            <param name="title">标题,无标题设为空</param>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.ExportExcel(System.Data.DataTable,System.String,System.String[],System.String[],System.String)">
+            <summary>
+            导出Excel表格
+            </summary>
+            <param name="dt">数据</param>
+            <param name="fileName">文件名,可为空。为空时默认文件名：导出数据.xls</param>
+            <param name="heads">表头部分信息，表头的行数和字符串组的length一样。</param>
+            <param name="columnNames">列名，数量必须与列的数目一致，否则直接加载DataTable的列名。</param>
+            <param name="title">标题,无标题设为空</param>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.ExportExcel(System.Data.DataSet,System.String,System.String[])">
+            <summary>
+            导出Excel 支持多个sheet
+            </summary>
+            <param name="ds">数据源</param>
+            <param name="fileName">文件名</param>
+            <param name="sheetNames">sheet名称数组，数组个数和数据表的个数保持一致</param>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.CreateStylesheet(System.Xml.XmlTextWriter,System.String[],System.String[],System.String)">
+            <summary>
+            动态生成XSL，并写入XML流
+            </summary>
+            <param name="writer">XML流</param>
+            <param name="headers">表头数组</param>
+            <param name="fields">字段数组</param>
+            <param name="title">标题,无标题设为空</param>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.ExportCSV(System.Data.DataTable,System.String,System.String)">
+            <summary>
+            导出CSV
+            </summary>
+            <param name="dt">数据源</param>
+            <param name="fileName">输出文件名</param>
+            <param name="title">标题,无标题设为空</param>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.ExportCSV(System.Data.DataTable,System.Int32[],System.String,System.String)">
+            <summary>
+            导出CSV
+            </summary>
+            <param name="dt">数据源</param>
+            <param name="columnIndexList">导出的列索引数组</param>
+            <param name="fileName">输出文件名</param>
+            <param name="title">标题,无标题设为空</param>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.ExportCSV(System.Data.DataTable,System.String[],System.String,System.String)">
+            <summary>
+            导出CSV
+            </summary>
+            <param name="dt">数据源</param>
+            <param name="columnNameList">导出的列的列名数组</param>
+            <param name="fileName">输出文件名</param>
+            <param name="title">标题,无标题设为空</param>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.ExportCSV(System.Data.DataTable,System.Int32[],System.String[],System.String,System.String)">
+            <summary>
+            导出CSV
+            </summary>
+            <param name="dt">数据源</param>
+            <param name="columnIndexList">导出的列索引数组</param>
+            <param name="heads">导出的列标题数组</param>
+            <param name="fileName">输出文件名</param>
+            <param name="title">标题,无标题设为空</param>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.ExportCSV(System.Data.DataTable,System.String[],System.String[],System.String,System.String)">
+            <summary>
+            导出CSV
+            </summary>
+            <param name="dt">数据源</param>
+            <param name="columnNameList">导出的列的列名数组</param>
+            <param name="heads">导出的列标题数组</param>
+            <param name="fileName">输出文件名</param>
+            <param name="title">标题,无标题设为空</param>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.ExportCSV(System.Data.DataSet,System.String[],System.String[],System.String,System.String)">
+            <summary>
+            导出CSV
+            </summary>
+            <param name="ds">数据源</param>
+            <param name="heads">导出的表头数组</param>
+            <param name="fields">导出的字段数组</param>
+            <param name="fileName">输出文件名</param>
+            <param name="title">标题,无标题设为空</param>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.ReplaceSpecialChars(System.String)">
+            <summary>
+             替换特殊字符
+            </summary>
+            <param name="input">字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.GetColumnIndexByColumnName(System.Data.DataColumnCollection,System.String)">
+            <summary>
+            根据数据列的列名取数据列的列索引
+            </summary>
+            <param name="dcc">数据列集合</param>
+            <param name="columnName">数据列的列名</param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.Export(System.Data.DataTable,System.String,System.String,Salmon.Common.ScUtility.ExportFormat)">
+            <summary>
+            导出
+            
+            <para>*  注意事项：DataTable的列头将转为Excel表格的列头,</para>
+            </summary>
+            <param name="dt">数据</param>
+            <param name="fileName">文件名</param>
+            <param name="title">标题,可为空</param>
+            <param name="fileType">文件类型</param>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.Export(System.Data.DataTable,System.String,System.String[],System.String,Salmon.Common.ScUtility.ExportFormat)">
+            <summary>
+            导出
+            <param name="dt">数据</param>
+            <param name="fileName">文件名</param>
+            <param name="heads">表头部分信息，表头的行数和字符串组的length一样。</param>
+            <param name="title">标题,可为空</param>
+            <param name="fileType">文件类型</param>
+            </summary>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.Export(System.Data.DataTable,System.String,System.String[],System.String[],System.String,Salmon.Common.ScUtility.ExportFormat)">
+            <summary>
+            导出
+            <param name="dt">数据</param>
+            <param name="fileName">文件名</param>
+            <param name="heads">表头部分信息，表头的行数和字符串组的length一样。</param>
+            <param name="columnNames">指定列名，列名数必须和DataTable的列名数一致，否则，不可用</param>
+            <param name="title">标题,可为空</param>
+            <param name="fileType">文件类型</param>
+            </summary>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.DateConvert4CSV(System.Data.DataTable,System.String)">
+            <summary>
+            此方法为临时解决方案，解决导出CSV文件时，日期字符串在Excel显示为英文日期格式的问题
+            <para>* 此方案为在现有的日期字符串前加空格</para>
+            </summary>
+            创建人：倪敏
+            创建日期：2013-01-28
+            <param name="dt">数据源</param>
+            <param name="colNames">要控制的列。格式：,初登日期,记录日期,</param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.ImportDataTableByExcel(System.String)">
+            <summary>
+            Excel里面的数据生成DataSet，可以支持多sheet页请求
+            </summary>
+            <param name="filepath">文件的服务路径</param>
+            <returns>返回Excel的数据集</returns>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.UpfileExcel(System.Web.HttpPostedFileBase,System.String)">
+            <summary>
+            将Excel上传到服务器端,可以自定义上传文件的路径,并返回当上传的Excel的数据
+            </summary>
+            <param name="files">上传控件</param>
+            <param name="ipath">上传路径</param>
+            <returns>返回文件的数据集</returns>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.ExportHelper.ExcelToDataTable(System.String,System.String)">
+            <summary>    
+            把数据从Excel装载到DataTable    
+            </summary>    
+            <param name="pathName">带路径的Excel文件名</param>    
+            <param name="sheetName">工作表名</param>
+            <param name="tbContainer">将数据存入的DataTable</param>
+            <returns></returns> 
+        </member>
+        <member name="T:Salmon.Common.ScUtility.ExportFormat">
+            <summary>
+            导出文件的格式
+            </summary>
+            创建人：倪敏
+            创建日期：2012-09-19
+        </member>
+        <member name="F:Salmon.Common.ScUtility.ExportFormat.CSV">
+            <summary>
+            CSV
+            </summary>
+        </member>
+        <member name="F:Salmon.Common.ScUtility.ExportFormat.Excel">
+            <summary>
+            Excel
+            </summary>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.HttpHelper.GetHtmlSource(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <param name="cookie">不需要cookie可以传空字符串</param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.HttpHelper.PostRequest(System.String,System.String)">
+            <summary>
+            Get page's html source with login params
+            </summary>
+            <param name="strUrl"></param>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.HttpHelper.ImageDownload(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Download image, and save in path with file name
+            </summary>
+            <param name="url">url</param>
+            <param name="path">path</param>
+            <param name="file">new file name</param>
+            <param name="replace">true: relace; false: do not replace</param>
+            <returns></returns>
+        </member>
+        <member name="P:Salmon.Common.ScUtility.IpHelper.IPAddress">
+            <summary>
+            获取客户端真实IP，如果有代理则取第一个非内网地址
+            </summary>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.IpHelper.IsIPAddress(System.String)">
+            <summary>
+            判断是否为IP地址
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.IpHelper.GetServerIP(System.Web.HttpContext)">
+            <summary>
+            获取服务器端IP 
+            </summary>
+            <param name="httpContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.IpHelper.GetClientIp(System.Web.HttpContext)">
+            <summary>
+            得到客户端IP
+            </summary>
+            <param name="httpContext">HttpContext对象</param>
+            <returns>客户端ip字符串</returns>
+        </member>
+        <member name="M:Salmon.Common.ScUtility.PathHelper.MapPath(System.String)">
+            <summary>
+            封装MapPath方法，解决底层类调用System.Web.HttpContext.Current.Server.MapPath，
+            System.Web.HttpContext.Current为null值的问题
+            </summary>
+            <param name="path">相对路径</param>
+            <returns>文件在服务器的绝对路径</returns>
+        </member>
+        <member name="M:Salmon.Common.ScLog.LoggerBase.GetTraceID(System.Web.HttpContext)">
+            <summary>
+            获取TraceID
+            </summary>
+            <param name="httpContext"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Salmon.Common.ScLog.ChannelLogModel._logFormat">
+            <summary>
+            日志必须以[开始，用于匹配多行的开始符
+            </summary>
+        </member>
+        <member name="F:Salmon.Common.ScLog.ChannelLogModel._devLogFormat">
+            <summary>
+            开发模式下的日志
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.LogTime">
+            <summary>
+            日志记录时间
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.TraceID">
+            <summary>
+            TraceID
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.ThreadID">
+            <summary>
+            线程ID
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.Level">
+            <summary>
+            日志级别
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.Line">
+            <summary>
+            日志所在的行
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.MethodName">
+            <summary>
+            方法名或者接口服务名
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.UserCode">
+            <summary>
+            用户代码
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.Keyword">
+            <summary>
+            关键字：Error-500，表示错误，Business-100表示业务代码
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.LogMessage">
+            <summary>
+            日志消息
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.ExceptionType">
+            <summary>
+            异常类型
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.StackTrace">
+            <summary>
+            异常堆栈信息
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.ProductLine">
+            <summary>
+            产品线
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.AppName">
+            <summary>
+            产品名称
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.ServerName">
+            <summary>
+            服务器名称
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.ServerIP">
+            <summary>
+            服务器IP
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.User_Agent">
+            <summary>
+            User Agent
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.Content_Length">
+            <summary>
+            Url内容长度
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.Content_Type">
+            <summary>
+            Url内容类型
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.ClientIP">
+            <summary>
+            客户端IP
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.Url">
+            <summary>
+            请求页面或者接口的Url地址
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.QueryString">
+            <summary>
+            请求的Url 参数
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.Referrer">
+            <summary>
+            Referrer
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.ChannelLogModel.ContextData">
+            <summary>
+            上下文数据
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.CommonLogModel.LogMessage">
+            <summary>
+            日志消息
+            </summary>
+        </member>
+        <member name="P:Salmon.Common.ScLog.CommonLogModel.MethodName">
+            <summary>
+            方法名或者接口服务名
+            </summary>
+        </member>
+        <member name="M:Salmon.Common.ScLog.ILogger.SetLogStackLevel(System.Int32)">
+            <summary>
+            设置日志包装级别
+            </summary>
+            <param name="stackLevel"></param>
+        </member>
+        <member name="M:Salmon.Common.Md5Helper.Md5(System.String)">
+            <summary>
+            Get Hash string by MD5
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.ScMq.ReciveHandler.Recive(System.Func{System.Object,RabbitMQ.Client.Events.BasicDeliverEventArgs,System.Boolean},System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="messageHandler">由于消息处理验证机制回传时可能出现不可控因素，messageHandler里一定要有消息是否重复的验证机制。</param>
+            <param name="queue"></param>
+            <param name="routingKey"></param>
+            <param name="exchange"></param>
+        </member>
+        <member name="T:Salmon.Common.Security.DESEncrypt">
+            <summary>
+            DES加密/解密类。
+            LiTianPing
+            </summary>
+        </member>
+        <member name="M:Salmon.Common.Security.DESEncrypt.Encrypt(System.String)">
+            <summary>
+            加密
+            </summary>
+            <param name="Text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.Security.DESEncrypt.Encrypt(System.String,System.String)">
+            <summary> 
+            加密数据 
+            </summary> 
+            <param name="Text"></param> 
+            <param name="sKey"></param> 
+            <returns></returns> 
+        </member>
+        <member name="M:Salmon.Common.Security.DESEncrypt.Decrypt(System.String)">
+            <summary>
+            解密
+            </summary>
+            <param name="Text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.Security.DESEncrypt.Decrypt(System.String,System.String)">
+            <summary> 
+            解密数据 
+            </summary> 
+            <param name="Text"></param> 
+            <param name="sKey"></param> 
+            <returns></returns> 
+        </member>
+        <member name="T:Salmon.Common.Security.Hash`2">
+            <summary>
+            TClass/TProvider
+            MD5/MD5CryptoServiceProvider; SHA1/SHA1Managed; SHA256/SHA256Managed; SHA384/SHA384Managed; SHA512/SHA512Managed
+            </summary>
+            <typeparam name="TClass"></typeparam>
+            <typeparam name="TProvider"></typeparam>
+        </member>
+        <member name="M:Salmon.Common.Security.Hash`2.Encrpt(System.Byte[])">
+            <summary>
+            Encrpt byte to string
+            </summary>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.Security.Hash`2.Encrpt(System.String)">
+            <summary>
+            Encrpt string
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <!-- 对于成员“T:Salmon.Common.Security.Sec”忽略有格式错误的 XML 注释 -->
+        <member name="M:Salmon.Common.Security.Util.StringToBytes(System.String)">
+            <summary>
+            String To Bytes
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.Security.Util.BytesToString(System.Byte[])">
+            <summary>
+            Bytes To String
+            </summary>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.Security.Util.BytesToHexString(System.Byte[])">
+            <summary>
+            Bytes To Hex String
+            </summary>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Salmon.Common.Security.Util.HexStringToBytes(System.String)">
+            <summary>
+            Hex String To Bytes
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
